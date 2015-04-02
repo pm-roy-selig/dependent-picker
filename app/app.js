@@ -62,11 +62,7 @@
 
         .controller( "main", ["$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
-            $scope.carMake = "";
-            $scope.carModel = "";
-            $scope.carYear = "";
-
-            $scope.main = {
+             $scope.main = {
                 carMake: "",
                 carModel: "",
                 carYear: "",
@@ -74,9 +70,6 @@
                 models: [],
                 years: []
             };
-
-            //$scope.models = [];
-            //$scope.years = [];
 
 
             //here all our services callbacks assume happy paths
@@ -98,7 +91,7 @@
 
 
                     } );
-            }
+            };
 
             $scope.updateYears = function () {
                 CarPickerService.getCarModelYears( $scope.main.carMake + "/" + $scope.carModel, function ( result ) {
@@ -107,7 +100,7 @@
             }
 
             $scope.performCarSearch = function () {
-                console.log( "The filter is: " + $scope.main.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
+                //console.log( "The filter is: " + $scope.main.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
             }
 
         }

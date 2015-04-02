@@ -1,28 +1,28 @@
-<!--don't want to use ng-show to manage which picker type is shown,
-but...ng-if prevents model and options from binding correctly; needs research-->
-
 <label>{{label}}</label>
 
-<div ng-show="type==='button-group'"
-     class="btn-group"
-     role="group" aria-label="...">
-    <button type="button" class="btn btn-default"
-            ng-class="{active:model===option.name}"
-            ng-repeat="option in options"
-            ng-click="select( option.name )">{{option.name}}
-    </button>
-</div>
+<span ng-switch="type">
 
-<hr ng-show="type==='button-group'">
+    <div ng-switch-when="button-group">
+        <div class="btn-group"
+             role="group" aria-label="...">
+            <button type="button" class="btn btn-default"
+                    ng-class="{active:model===option.name}"
+                    ng-repeat="option in options"
+                    ng-click="select( option.name )">{{option.name}}
+            </button>
+        </div>
+        <hr>
+    </div>
 
+    <select ng-switch-default
+            ng-model="model"
+            ng-disabled="options.length===0"
+            ng-change="onpick()">
+        <option ng-repeat="option in options"
+                value="{{option.value||option.name}}">{{option.name}}
+        </option>
+    </select>
 
-<select ng-show="!type||type==='select'"
-        ng-model="model"
-        ng-disabled="options.length===0"
-        ng-change="onpick()">
-    <option ng-repeat="option in options"
-            value="{{option.value||option.name}}">{{option.name}}
-    </option>
-</select>
+    <span ng-if="progressive && model.length>0 || progressive===false || !progressive" ng-transclude></span>
 
-<span ng-if="progressive && model.length>0 || progressive===false || !progressive" ng-transclude></span>
+</span>
