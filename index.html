@@ -22,20 +22,20 @@
             <div class="panel-body">
 
                 <label>Make</label>
-                <select ng-model="carMake"
-                        ng-options="item.name as item.name for item in makes"
+                <select ng-model="main.carMake"
+                        ng-options="item.name as item.name for item in main.makes"
                         ng-change="updateModels()"></select>
 
                 <label>Model</label>
-                <select ng-model="carModel"
-                        ng-options="item.name as item.name for item in models"
-                        ng-disabled="models.length===0"
+                <select ng-model="main.carModel"
+                        ng-options="item.name as item.name for item in main.models"
+                        ng-disabled="main.models.length===0"
                         ng-change="updateYears()"></select>
 
                 <label>Year</label>
-                <select ng-model="carYear"
-                        ng-options="item.name as item.name for item in years"
-                        ng-disabled="years.length===0"></select>
+                <select ng-model="main.carYear"
+                        ng-options="item.name as item.name for item in main.years"
+                        ng-disabled="main.years.length===0"></select>
 
 
 
@@ -62,9 +62,9 @@
                 <div class="panel-title">Non-Nested</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="makes" model="carMake" onpick="updateModels()"></picker>
-                <picker label="Model" options="models" model="carModel" onpick="updateYears()"></picker>
-                <picker label="Year" options="years" model="carYear" onpick="performSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()"></picker>
+                <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()"></picker>
+                <picker label="Year" options="main.years" model="main.carYear" onpick="performSearch()"></picker>
             </div>
         </div>
 
@@ -76,9 +76,9 @@
             <div class="panel-title">Nested</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="makes" model="carMake" onpick="updateModels()">
-                    <picker label="Model" options="models" model="carModel" onpick="updateYears()">
-                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
@@ -89,9 +89,9 @@
                 <div class="panel-title">Nested with Progressive Disclosure</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="makes" model="carMake" onpick="updateModels()" progressive="true">
-                    <picker label="Model" options="models" model="carModel" onpick="updateYears()" progressive="true">
-                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()" progressive="true">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()" progressive="true">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
@@ -103,9 +103,9 @@
                 <div class="panel-title">Button-Group Style</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="makes" model="carMake" onpick="updateModels()" progressive="true" type="button-group">
-                    <picker label="Model" options="models" model="carModel" onpick="updateYears()" progressive="true" type="button-group">
-                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()" type="button-group"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()" progressive="true" type="button-group">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()" progressive="true" type="button-group">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()" type="button-group"></picker>
                     </picker>
                 </picker>
             </div>

@@ -66,38 +66,48 @@
             $scope.carModel = "";
             $scope.carYear = "";
 
-            $scope.makes = [];
-            $scope.models = [];
-            $scope.years = [];
+            $scope.main = {
+                carMake: "",
+                carModel: "",
+                carYear: "",
+                makes: [],
+                models: [],
+                years: []
+            };
+
+            //$scope.models = [];
+            //$scope.years = [];
 
 
             //here all our services callbacks assume happy paths
             CarPickerService.getCarMakes().then( function ( result ) {
-                $scope.makes = result;
+                $scope.main.makes = result;
             } );
 
             $scope.updateModels = function () {
                 CarPickerService
-                    .getCarModels( $scope.carMake )
+                    .getCarModels( $scope.main.carMake )
                     .then( function ( result ) {
 
                         //for convenience we apply the filter here, though it would really be handled server-side
                         result.forEach( function ( m ) {
-                            if ( m.name === $scope.carMake ) {
-                                $scope.models = m.models;
+                            if ( m.name === $scope.main.carMake ) {
+                                $scope.main.models = m.models;
                             }
                         } );
+
+
                     } );
             }
 
             $scope.updateYears = function () {
-                CarPickerService.getCarModelYears( $scope.carMake + "/" + $scope.carModel, function ( result ) {
-                    $scope.years = result;
+                CarPickerService.getCarModelYears( $scope.main.carMake + "/" + $scope.carModel, function ( result ) {
+                    $scope.main.years = result;
                 } );
             }
 
             $scope.performCarSearch = function () {
-                console.log( "The filter is: " + $scope.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
+                console.log( "The filter is: " + $scope.main.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
             }
 
         }
