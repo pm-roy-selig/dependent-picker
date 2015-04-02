@@ -1,7 +1,29 @@
+<!--don't want to use ng-show to manage which picker type is shown,
+but...ng-if prevents model and options from binding correctly; needs research-->
+
+
+
 <label>{{label}}</label>
-<select ng-model="model"
-        ng-change="onpick()">
+
+<div ng-show="type==='button-group'"
+     class="btn-group"
+     role="group" aria-label="...">
+    <button type="button" class="btn btn-default"
+            ng-class="{active:model===option.name}"
+            ng-repeat="option in options"
+            ng-click="select( option.name )">{{option.name}}
+    </button>
+</div>
+
+<hr ng-show="type==='button-group'">
+
+
+<select ng-show="!type||type==='select'"
+        ng-model="model"
+        ng-change="">
     <option ng-repeat="option in options"
-            value="{{option.value||option.name}}">{{option.name}}</option>
+            value="{{option.value||option.name}}">{{option.name}}
+    </option>
 </select>
+
 <span ng-if="progressive && model.length>0 || progressive===false || !progressive" ng-transclude></span>

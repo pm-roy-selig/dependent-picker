@@ -77,11 +77,11 @@
                     .then( function ( result ) {
 
                         //for convenience we apply the filter here, though it would really be handled server-side
-                       result.forEach(function( m ){
+                        result.forEach( function ( m ) {
                             if ( m.name === $scope.carMake ) {
                                 $scope.models = m.models;
                             }
-                        });
+                        } );
                     } );
             }
 
@@ -111,6 +111,12 @@
                     onpick: "&",
                     type: "@",
                     progressive: "@"
+                },
+                link: function ( scope ) {
+                    scope.select = function ( value ) {
+                        scope.model = value;
+                        scope.onpick();
+                    }
                 }
 
             };

@@ -28,18 +28,25 @@
 
                 <label>Model</label>
                 <select ng-model="carModel"
-                        ng-options="item for item in models"
+                        ng-options="item.name as item.name for item in models"
                         ng-disabled="models.length==0"
                         ng-change="updateYears()"></select>
 
                 <label>Year</label>
                 <select ng-model="carYear"
-                        ng-options="item for item in years"
+                        ng-options="item.name as item.name for item in years"
                         ng-disabled="years.length==0"></select>
+
+
+
+
+
 
             </div>
         </div>
 
+
+        <i>And the filter is:</i>  {{carMake+"-"+carModel+"-"+carYear}}
 
 
     </div>
@@ -71,7 +78,7 @@
             <div class="panel-body">
                 <picker label="Make" options="makes" model="carMake" onpick="updateModels()">
                     <picker label="Model" options="models" model="carModel" onpick="updateYears()">
-                        <picker label="Year" options="years" model="carYear" onpick="performSearch()"></picker>
+                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
@@ -84,12 +91,25 @@
             <div class="panel-body">
                 <picker label="Make" options="makes" model="carMake" onpick="updateModels()" progressive="true">
                     <picker label="Model" options="models" model="carModel" onpick="updateYears()" progressive="true">
-                        <picker label="Year" options="years" model="carYear" onpick="performSearch()"></picker>
+                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
         </div>
 
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">Button-Group Style</div>
+            </div>
+            <div class="panel-body">
+                <picker label="Make" options="makes" model="carMake" onpick="updateModels()" progressive="true" type="button-group">
+                    <picker label="Model" options="models" model="carModel" onpick="updateYears()" progressive="true" type="button-group">
+                        <picker label="Year" options="years" model="carYear" onpick="performCarSearch()" type="button-group"></picker>
+                    </picker>
+                </picker>
+            </div>
+        </div>
 
 
 
