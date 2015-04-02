@@ -18,13 +18,20 @@
     </picker>
 
 
-    <ul>
-        <li ng-repeat="make in makes">{{make.name}}</li>
-    </ul>
 
-    <ul>
-        <li ng-repeat="model in models">{{model}}</li>
-    </ul>
+
+    <select ng-model="makeFilter"
+            ng-options="item.name as item.name for item in makes"
+            ng-change="updateModels()"></select>
+
+    <select ng-model="modelFilter"
+            ng-options="item for item in models"
+            ng-disabled="models.length==0"
+            ng-change="updateYears()"></select>
+
+    <select ng-model="yearFilter"
+            ng-options="item for item in years"
+            ng-disabled="years.length>0"></select>
 
 </div>
 

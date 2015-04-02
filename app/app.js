@@ -50,12 +50,18 @@
             CarPickerService.getCarMakes( function ( result ) {
                 $scope.makes = result;
             } );
-            CarPickerService.getCarModels( "Toyota", function ( result ) {
-                $scope.models = result;
-            } );
-            CarPickerService.getCarModelYears( "Toyota+Corolla", function ( result ) {
-                $scope.years = result;
-            } );
+
+            $scope.updateModels = function () {
+                CarPickerService.getCarModels( "Toyota", function ( result ) {
+                    $scope.models = result;
+                } );
+            }
+
+            $scope.updateYears = function() {
+                CarPickerService.getCarModelYears( "Toyota+Corolla", function ( result ) {
+                    $scope.years = result;
+                } );
+            }
 
         } ] );
 })();
