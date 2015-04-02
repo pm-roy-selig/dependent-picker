@@ -63,5 +63,21 @@
                 } );
             }
 
-        } ] );
+        } ] )
+
+        .directive( "picker", function(){
+
+          return {
+                restrict: "E",
+                transclude:true,
+                template:"<select></select><ng-transclude></ng-transclude>",
+                scope:{
+                    model:"=",
+                    options: "="
+                },
+                controller:function( $scope ){}
+
+          };
+
+        });
 })();
