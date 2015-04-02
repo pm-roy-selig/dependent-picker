@@ -2,18 +2,17 @@
  * Created by RoySelig on 4/1/15.
  */
 
-(function () {
+(function() {
     angular.module( "app", [] )
 
         .factory( "CarPickerService", function ( $http ) {
 
-            function getCarMakes() {
-                return $http.get( "data/car-makes.json" )
-                    .success( function ( data ) {
 
 
-                        return data;
-                    } )
+            function getCarMakes( callback ) {
+
+                $http.get( "data/car-makes.json" )
+                    .success( callback );
             }
 
             return {
@@ -22,9 +21,11 @@
 
         } )
 
-        .controller( "main", function ( $scope, CarPickerService ) {
+        .controller( "main", ["$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
-            $scope.makes = CarPickerService.getCarMakes();
 
-        } );
+
+            CarPickerService.getCarMakes( function( data ){ $scope.makes = data; });
+
+        } ]);
 })();
