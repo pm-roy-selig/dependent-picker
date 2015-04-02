@@ -5,29 +5,37 @@
 (function () {
     angular.module( "app", [] )
 
-        .factory( "CarPickerService", function ( $http ) {
+        .factory( "CarPickerService", function ( $http, $q ) {
 
-            function getCarMakes( callback ) {
 
-                $http.get( "data/car-makes.json" )
-                    .success( callback );
+            /*
+             * Public API
+             * */
+
+            return {
+                getCarMakes: getCarMakes,
+                getCarModels: getCarModels,
+                getCarModelYears: getCarModelYears
+            };
+
+            /*
+             * Public Methods
+             * */
+
+            function getCarMakes() {
+
+                var request = $http.get( "data/car-makes.json" );
+
+                return ( request.then( handleSuccess, handleError ) );
+
             }
 
-            function getCarModels( makeFilter, callback ) {
+            function getCarModels( filter ) {
 
-                $http.get( "data/car-models.json?filter=" + makeFilter )
-                    .success( function ( data ) {
+                var request = $http.get( "data/car-models.json?filter=" + filter );
 
-                        //we filter here for simplicity but it is actually the responsibility of the server
-                        var make = data.filter( function ( m ) {
-                            return m.name === makeFilter;
-                        } )
+                return ( request.then( handleSuccess, handleError ) );
 
-                        var result = make[ 0 ];
-
-                        callback.call( this, result.models );
-                    }
-                );
             }
 
             function getCarModelYears( modelYearFilter, callback ) {
@@ -37,47 +45,76 @@
 
             }
 
-            return {
-                getCarMakes: getCarMakes,
-                getCarModels: getCarModels,
-                getCarModelYears: getCarModelYears
+            /*
+             * Private Methods
+             * */
+            function handleError( response ) {
+                return ( $q.reject( response.data.message ) );
+            }
+
+            function handleSuccess( response ) {
+
+                return ( response.data );
+
             }
 
         } )
 
         .controller( "main", [ "$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
-            CarPickerService.getCarMakes( function ( result ) {
+            $scope.carMake = "";
+            $scope.carModel = "";
+            $scope.carYear = "";
+
+            //here all our services callbacks assume happy paths
+            CarPickerService.getCarMakes().then( function ( result ) {
                 $scope.makes = result;
             } );
 
             $scope.updateModels = function () {
-                CarPickerService.getCarModels( "Toyota", function ( result ) {
-                    $scope.models = result;
-                } );
+                CarPickerService
+                    .getCarModels( $scope.carMake )
+                    .then( function ( result ) {
+
+                        //for convenience we apply the filter here, though it would really be handled server-side
+                       result.forEach(function( m ){
+                            if ( m.name === $scope.carMake ) {
+                                $scope.models = m.models;
+                            }
+                        });
+                    } );
             }
 
-            $scope.updateYears = function() {
-                CarPickerService.getCarModelYears( "Toyota+Corolla", function ( result ) {
+            $scope.updateYears = function () {
+                CarPickerService.getCarModelYears( $scope.carMake + "/" + $scope.carModel, function ( result ) {
                     $scope.years = result;
                 } );
             }
 
-        } ] )
+            $scope.performCarSearch = function () {
+                console.log( "The filter is: " + $scope.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
+            }
 
-        .directive( "picker", function(){
+        }
+        ] )
 
-          return {
+        .
+        directive( "picker", function () {
+
+            return {
                 restrict: "E",
-                transclude:true,
-                template:"<select></select><ng-transclude></ng-transclude>",
-                scope:{
-                    model:"=",
-                    options: "="
-                },
-                controller:function( $scope ){}
+                transclude: true,
+                templateUrl: "app/picker.tpl.html",
+                scope: {
+                    model: "=",
+                    options: "=",
+                    label: "@",
+                    callback: "&",
+                    pickType: "@",
+                    pickStyle: "@"
+                }
 
-          };
+            };
 
-        });
+        } );
 })();
