@@ -109,7 +109,7 @@
                     model: "=",
                     options: "=",
                     label: "@",
-                    callback: "&",
+                    onpick: "&",
                     pickType: "@",
                     pickStyle: "@"
                 }

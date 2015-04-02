@@ -1,6 +1,6 @@
 <label>{{label}}</label>
 <select ng-model="model"
-        ng-change="callback()">
+        ng-change="onpick()">
     <option ng-repeat="option in options"
             value="{{option.value||option.name}}">{{option.name}}</option>
 </select>
