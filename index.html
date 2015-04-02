@@ -9,34 +9,43 @@
 <body ng-controller="main">
 
 <div class="container">
-    <h3>Car Picker</h3>
-
-    <!--directives approach-->
-
-
-    <picker>
-        <picker>
-            <picker></picker>
-        </picker>
-    </picker>
-
-
-
+    <h3>Angular Car Picker</h3>
 
     <!--inline approach-->
 
-    <select ng-model="makeFilter"
-            ng-options="item.name as item.name for item in makes"
-            ng-change="updateModels()"></select>
+    <div class="well">
+        <h4>Static Inline Approach</h4>
+        <label>Make</label>
+        <select ng-model="carMake"
+                ng-options="item.name as item.name for item in makes"
+                ng-change="updateModels()"></select>
 
-    <select ng-model="modelFilter"
-            ng-options="item for item in models"
-            ng-disabled="models.length==0"
-            ng-change="updateYears()"></select>
+        <label>Model</label>
+        <select ng-model="carModel"
+                ng-options="item for item in models"
+                ng-disabled="models.length==0"
+                ng-change="updateYears()"></select>
 
-    <select ng-model="yearFilter"
-            ng-options="item for item in years"
-            ng-disabled="years.length>0"></select>
+        <label>Year</label>
+        <select ng-model="carYear"
+                ng-options="item for item in years"
+                ng-disabled="years.length==0"></select>
+    </div>
+
+    <!--directives approach-->
+
+    <div class="well">
+        <h4>Reusable Directives Approach</h4>
+        <picker label="Make" options="makes" model="carMake" callback="updateModels()" pick-style="">
+
+        </picker>
+        <picker label="Model"  options="models" model="carModel" callback="updateYears()">
+
+        </picker>
+        <picker label="Year" options="years" model="carYear" callback="performSearch()"></picker>
+    </div>
+
+
 
 </div>
 
