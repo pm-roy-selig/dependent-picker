@@ -1,8 +1,6 @@
 <!--don't want to use ng-show to manage which picker type is shown,
 but...ng-if prevents model and options from binding correctly; needs research-->
 
-
-
 <label>{{label}}</label>
 
 <div ng-show="type==='button-group'"
@@ -20,7 +18,8 @@ but...ng-if prevents model and options from binding correctly; needs research-->
 
 <select ng-show="!type||type==='select'"
         ng-model="model"
-        ng-change="">
+        ng-disabled="options.length===0"
+        ng-change="onpick()">
     <option ng-repeat="option in options"
             value="{{option.value||option.name}}">{{option.name}}
     </option>

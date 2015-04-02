@@ -29,13 +29,13 @@
                 <label>Model</label>
                 <select ng-model="carModel"
                         ng-options="item.name as item.name for item in models"
-                        ng-disabled="models.length==0"
+                        ng-disabled="models.length===0"
                         ng-change="updateYears()"></select>
 
                 <label>Year</label>
                 <select ng-model="carYear"
                         ng-options="item.name as item.name for item in years"
-                        ng-disabled="years.length==0"></select>
+                        ng-disabled="years.length===0"></select>
 
 
 

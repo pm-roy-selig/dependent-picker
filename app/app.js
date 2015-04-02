@@ -60,11 +60,16 @@
 
         } )
 
-        .controller( "main", [ "$scope", "CarPickerService", function ( $scope, CarPickerService ) {
+        .controller( "main", ["$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
             $scope.carMake = "";
             $scope.carModel = "";
             $scope.carYear = "";
+
+            $scope.makes = [];
+            $scope.models = [];
+            $scope.years = [];
+
 
             //here all our services callbacks assume happy paths
             CarPickerService.getCarMakes().then( function ( result ) {
