@@ -98,8 +98,7 @@
         }
         ] )
 
-        .
-        directive( "picker", function () {
+        .directive( "picker", function () {
 
             return {
                 restrict: "E",
@@ -110,8 +109,8 @@
                     options: "=",
                     label: "@",
                     onpick: "&",
-                    pickType: "@",
-                    pickStyle: "@"
+                    type: "@",
+                    progressive: "@"
                 }
 
             };

@@ -82,8 +82,8 @@
                 <div class="panel-title">Nested with Progressive Disclosure</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="makes" model="carMake" onpick="updateModels()" pick-style="progressive">
-                    <picker label="Model" options="models" model="carModel" onpick="updateYears()">
+                <picker label="Make" options="makes" model="carMake" onpick="updateModels()" progressive="true">
+                    <picker label="Model" options="models" model="carModel" onpick="updateYears()" progressive="true">
                         <picker label="Year" options="years" model="carYear" onpick="performSearch()"></picker>
                     </picker>
                 </picker>

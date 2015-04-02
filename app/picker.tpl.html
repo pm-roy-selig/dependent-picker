@@ -4,4 +4,4 @@
     <option ng-repeat="option in options"
             value="{{option.value||option.name}}">{{option.name}}</option>
 </select>
-<ng-transclude></ng-transclude>
+<span ng-if="progressive && model.length>0 || progressive===false || !progressive" ng-transclude></span>
