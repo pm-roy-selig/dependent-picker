@@ -1,0 +1,8 @@
+/**
+ * Created by RoySelig on 4/1/15.
+ */
+[
+    { name: "Saturn" },
+    { name: "Toyota" },
+    { name: "Honda" }
+];
