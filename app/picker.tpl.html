@@ -32,7 +32,9 @@
 
 
     <span ng-switch-default class="select">
-       <span class="input-wrapper"><input ng-model="model" ng-focus="picker.show()" ng-blur="picker.hide()" ></span>
+       <span class="input-wrapper">
+           <input ng-model="model" ng-focus="picker.show()" ng-blur="picker.hide()" >
+       </span>
         <ul class="menu" ng-show="menu">
             <li class="item"
                 ng-repeat="option in options"
