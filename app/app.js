@@ -62,13 +62,17 @@
 
         .controller( "main", ["$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
-             $scope.main = {
+            //reveal items to scope
+            $scope.main = {
                 carMake: "",
                 carModel: "",
                 carYear: "",
                 makes: [],
                 models: [],
-                years: []
+                years: [],
+                updateModels: updateModels,
+                updateYears: updateYears,
+                performCarSearch: performCarSearch
             };
 
 
@@ -77,7 +81,7 @@
                 $scope.main.makes = result;
             } );
 
-            $scope.updateModels = function () {
+            function updateModels() {
                 CarPickerService
                     .getCarModels( $scope.main.carMake )
                     .then( function ( result ) {
@@ -93,18 +97,19 @@
                     } );
             };
 
-            $scope.updateYears = function () {
+            function updateYears() {
                 CarPickerService.getCarModelYears( $scope.main.carMake + "/" + $scope.carModel, function ( result ) {
                     $scope.main.years = result;
                 } );
             }
 
-            $scope.performCarSearch = function () {
+            function performCarSearch() {
                 //console.log( "The filter is: " + $scope.main.carMake + "/" + $scope.carModel + "/" + $scope.carYear );
             }
 
         }
         ] )
+
 
         .directive( "picker", function () {
 
@@ -120,12 +125,17 @@
                     type: "@",
                     progressive: "@"
                 },
-                link: function ( scope ) {
+                link: [ "scope", "element", "attrs", "$timeout", function ( scope, element, attrs, $timeout ) {
                     scope.select = function ( value ) {
                         scope.model = value;
                         scope.onpick();
+                    };
+                    scope.menu = false;
+                    scope.hideMenu=function( ms ){
+                        var menu = scope.menu;
+                        setTimeout( function(){ menu=false;alert(1) }, ms );
                     }
-                }
+                }]
 
             };
 

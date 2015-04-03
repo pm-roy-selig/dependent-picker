@@ -62,9 +62,9 @@
                 <div class="panel-title">Non-Nested</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()"></picker>
-                <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()"></picker>
-                <picker label="Year" options="main.years" model="main.carYear" onpick="performSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="main.updateModels()"></picker>
+                <picker label="Model" options="main.models" model="main.carModel" onpick="main.updateYears()"></picker>
+                <picker label="Year" options="main.years" model="main.carYear" onpick="main.performSearch()"></picker>
             </div>
         </div>
 
@@ -76,9 +76,9 @@
             <div class="panel-title">Nested</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()">
-                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()">
-                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="main.updateModels()">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="main.updateYears()">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="main.performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
@@ -89,9 +89,9 @@
                 <div class="panel-title">Nested with Progressive Disclosure</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()" progressive="true">
-                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()" progressive="true">
-                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="main.updateModels()" progressive="true">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="main.updateYears()" progressive="true">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="main.performCarSearch()"></picker>
                     </picker>
                 </picker>
             </div>
@@ -103,9 +103,9 @@
                 <div class="panel-title">Button-Group Style</div>
             </div>
             <div class="panel-body">
-                <picker label="Make" options="main.makes" model="main.carMake" onpick="updateModels()" progressive="true" type="button-group">
-                    <picker label="Model" options="main.models" model="main.carModel" onpick="updateYears()" progressive="true" type="button-group">
-                        <picker label="Year" options="main.years" model="main.carYear" onpick="performCarSearch()" type="button-group"></picker>
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="main.updateModels()" progressive="true" type="button-group">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="main.updateYears()" progressive="true" type="button-group">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="main.performCarSearch()" type="button-group"></picker>
                     </picker>
                 </picker>
             </div>
@@ -121,6 +121,63 @@
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="app/app.js"></script>
 
+
+<style>
+
+    picker .select{
+        position: relative;
+        display:inline-block;
+    }
+    picker .select>.input-wrapper>input{
+        position:relative;
+        display:block;
+        border-radius:3px;
+        border:1px solid #cccccc;
+        z-index:0;
+    }
+
+    picker .select>.input-wrapper::after{
+
+        content:"▼";
+        color:#000000;
+        font-size:10px;
+        right:-30px;
+        z-index:1;
+        color:#000000;
+        position:absolute;
+        top:4px;
+        right:5px;
+
+
+    }
+
+
+    picker .menu{
+        position:absolute;
+        background:#ffffff;
+        border:1px solid #cccccc;
+        box-shadow: 2px 2px 2px 2px rgba(0,0,0,.15);
+        padding:0px;
+        list-style: none;
+        z-index:1;
+        margin:0px;
+        left:0px;
+        right:0px;
+
+    }
+
+    picker .menu > .item{
+        padding:3px 5px;
+        cursor: pointer;
+    }
+
+    picker .menu > .item:hover{
+        background-color:steelblue;
+        color:#ffffff;
+    }
+
+
+</style>
 
 </body>
 </html>

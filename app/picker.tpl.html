@@ -1,3 +1,4 @@
+
 <label>{{label}}</label>
 
 <span ng-switch="type">
@@ -14,15 +15,30 @@
         <hr>
     </div>
 
-    <select ng-switch-default
-            ng-model="model"
+
+    <span ng-switch-default class="select">
+       <span class="input-wrapper"><input ng-model="model" ng-focus="menu=true" ng-blur="menu=false" ></span>
+        <ul class="menu" ng-show="menu">
+            <li class="item"
+                ng-repeat="option in options"
+                ng-mousedown="select( option.value || option.name )"
+                value="{{option.value||option.name}}">{{option.name}}
+            </li>
+        </ul>
+    </span>
+
+    <!--select ng-switch-default
+            nog-model="model"
             ng-disabled="options.length===0"
-            ng-change="onpick()">
+            nog-change="onpick()">
         <option ng-repeat="option in options"
+                ng-click="select( options.value || options.name )"
                 value="{{option.value||option.name}}">{{option.name}}
         </option>
-    </select>
+    </select-->
 
-    <span ng-if="progressive && model.length>0 || progressive===false || !progressive" ng-transclude></span>
 
 </span>
+
+<span ng-if="progressive && model.length > 0 || progressive===false || !progressive" ng-transclude></span>
+
