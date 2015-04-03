@@ -24,7 +24,7 @@
 
             function getCarMakes() {
 
-                var request = $http.get( "data/car-makes.json" );
+                var request = $http.get( "data/car-make-model-year.json" );
 
                 return ( request.then( handleSuccess, handleError ) );
 
@@ -32,7 +32,7 @@
 
             function getCarModels( filter ) {
 
-                var request = $http.get( "data/car-models.json?filter=" + filter );
+                var request = $http.get( "data/car-make-model-year.json?filter=" + filter );
 
                 return ( request.then( handleSuccess, handleError ) );
 
@@ -40,7 +40,7 @@
 
             function getCarModelYears( modelYearFilter, callback ) {
 
-                $http.get( "data/car-years.json?filter=" + modelYearFilter )
+                $http.get( "data/car-make-model-year.json?filter=" + modelYearFilter )
                     .success( callback );
 
             }
@@ -85,6 +85,25 @@
                     .getCarModels( $scope.main.carMake )
                     .then( function ( result ) {
 
+                        /*
+                        result.forEach( function( make ){
+
+                            make.models.forEach( function( model ){
+
+                                var i = parseInt( Math.random() * 20 );
+
+                                model.years = [];
+                                for(var yy=2015; yy>2015-i; yy--){
+                                    model.years.push( { name:yy } );
+                                }
+
+                            });
+                        });
+
+                         console.log(JSON.stringify( result, null, 1 ));
+                        */
+
+
                         //for convenience we apply the filter here, though it would really be handled server-side
                         result.forEach( function ( m ) {
                             if ( m.name === $scope.main.carMake ) {
@@ -97,7 +116,23 @@
 
             function updateYears() {
                 CarPickerService.getCarModelYears( $scope.main.carMake + "/" + $scope.carModel, function ( result ) {
-                    $scope.main.years = result;
+
+                    //for convenience we apply the filter here, though it would really be handled server-side
+                    result.forEach( function ( make ) {
+                        if ( make.name === $scope.main.carMake ) {
+
+                            make.models.forEach( function ( model ) {
+
+                                if ( model.name === $scope.main.carModel ) {
+                                    $scope.main.years = model.years;
+                                }
+                            });
+
+
+                        }
+                    } );
+
+
                 } );
             }
 
