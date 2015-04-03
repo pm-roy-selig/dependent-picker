@@ -112,6 +112,19 @@
         </div>
 
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">Radio Style</div>
+            </div>
+            <div class="panel-body">
+                <picker label="Make" options="main.makes" model="main.carMake" onpick="main.updateModels()" progressive="true" type="radio">
+                    <picker label="Model" options="main.models" model="main.carModel" onpick="main.updateYears()" progressive="true" type="radio">
+                        <picker label="Year" options="main.years" model="main.carYear" onpick="main.performCarSearch()" type="radio"></picker>
+                    </picker>
+                </picker>
+            </div>
+        </div>
+
 
     </div>
 

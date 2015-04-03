@@ -9,33 +9,38 @@
             <button type="button" class="btn btn-default"
                     ng-class="{active:model===option.name}"
                     ng-repeat="option in options"
-                    ng-click="select( option.value || option.name )">{{option.name}}
+                    ng-click="picker.select( option.value || option.name )">{{option.name}}
             </button>
         </div>
         <hr>
     </div>
 
+    <div ng-switch-when="radio">
+
+        <label ng-repeat="option in options">
+
+            <input type="radio"
+                   name="{{picker.uid}}"
+                   ng-model="model"
+                   ng-change="picker.select( option.value || option.name )"
+                   value="{{option.value || option.name}}"
+                    />&nbsp;{{option.name}}&nbsp;
+          </label>
+
+        <hr>
+    </div>
+
 
     <span ng-switch-default class="select">
-       <span class="input-wrapper"><input ng-model="model" ng-focus="show()" ng-blur="hide()" ></span>
+       <span class="input-wrapper"><input ng-model="model" ng-focus="picker.show()" ng-blur="picker.hide()" ></span>
         <ul class="menu" ng-show="menu">
             <li class="item"
                 ng-repeat="option in options"
-                ng-click="select( option.value || option.name )"
+                ng-click="picker.select( option.value || option.name )"
                 value="{{option.value||option.name}}">{{option.name}}
             </li>
         </ul>
     </span>
-
-    <!--select ng-switch-default
-            nog-model="model"
-            ng-disabled="options.length===0"
-            nog-change="onpick()">
-        <option ng-repeat="option in options"
-                ng-click="select( options.value || options.name )"
-                value="{{option.value||option.name}}">{{option.name}}
-        </option>
-    </select-->
 
 
 </span>

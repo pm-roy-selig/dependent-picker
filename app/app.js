@@ -159,18 +159,25 @@
                 },
                 link: function ( scope, element, attrs ) {
 
-                    scope.select = function ( value ) {
+                    //expose directive behavior through a single scope object
+                    scope.picker = {
+                        uid: "pmcc-" + new Date().getTime(),
+                        select: select,
+                        menu: false,
+                        show:show,
+                        hide:hide
+                    };
+
+                    function select( value ) {
                         scope.model = value;
                         scope.onpick();
                     };
 
-                    scope.menu = false;
-
-                    scope.show=function(){
+                    function show(){
                         scope.menu = true;
                     }
 
-                    scope.hide = function () {
+                    function hide () {
 
                         $timeout( function () {
                             scope.menu = false;

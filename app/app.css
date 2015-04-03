@@ -9,6 +9,7 @@ picker .select>.input-wrapper>input{
     border-radius:3px;
     border:1px solid #cccccc;
     z-index:0;
+    padding:2px 15px 2px 5px;
 }
 
 picker .select>.input-wrapper::after{
