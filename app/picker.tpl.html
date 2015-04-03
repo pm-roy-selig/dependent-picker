@@ -9,7 +9,7 @@
             <button type="button" class="btn btn-default"
                     ng-class="{active:model===option.name}"
                     ng-repeat="option in options"
-                    ng-click="select( option.name )">{{option.name}}
+                    ng-click="select( option.value || option.name )">{{option.name}}
             </button>
         </div>
         <hr>
@@ -17,11 +17,11 @@
 
 
     <span ng-switch-default class="select">
-       <span class="input-wrapper"><input ng-model="model" ng-focus="menu=true" ng-blur="menu=false" ></span>
+       <span class="input-wrapper"><input ng-model="model" ng-focus="show()" ng-blur="hide()" ></span>
         <ul class="menu" ng-show="menu">
             <li class="item"
                 ng-repeat="option in options"
-                ng-mousedown="select( option.value || option.name )"
+                ng-click="select( option.value || option.name )"
                 value="{{option.value||option.name}}">{{option.name}}
             </li>
         </ul>

@@ -24,13 +24,13 @@
                 <label>Make</label>
                 <select ng-model="main.carMake"
                         ng-options="item.name as item.name for item in main.makes"
-                        ng-change="updateModels()"></select>
+                        ng-change="main.updateModels()"></select>
 
                 <label>Model</label>
                 <select ng-model="main.carModel"
                         ng-options="item.name as item.name for item in main.models"
                         ng-disabled="main.models.length===0"
-                        ng-change="updateYears()"></select>
+                        ng-change="main.updateYears()"></select>
 
                 <label>Year</label>
                 <select ng-model="main.carYear"
@@ -122,10 +122,6 @@
 <script src="app/app.js"></script>
 <link rel="stylesheet" href="app/app.css">
 
-<style>
-
-
-</style>
 
 </body>
 </html>

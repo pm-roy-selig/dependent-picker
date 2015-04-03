@@ -60,7 +60,7 @@
 
         } )
 
-        .controller( "main", ["$scope", "CarPickerService", function ( $scope, CarPickerService ) {
+        .controller( "main", [ "$scope", "CarPickerService", function ( $scope, CarPickerService ) {
 
             //reveal items to scope
             $scope.main = {
@@ -74,7 +74,6 @@
                 updateYears: updateYears,
                 performCarSearch: performCarSearch
             };
-
 
             //here all our services callbacks assume happy paths
             CarPickerService.getCarMakes().then( function ( result ) {
@@ -93,7 +92,6 @@
                             }
                         } );
 
-
                     } );
             };
 
@@ -110,8 +108,7 @@
         }
         ] )
 
-
-        .directive( "picker", function () {
+        .directive( "picker", function ( $timeout ) {
 
             return {
                 restrict: "E",
@@ -125,17 +122,28 @@
                     type: "@",
                     progressive: "@"
                 },
-                link: [ "scope", "element", "attrs", "$timeout", function ( scope, element, attrs, $timeout ) {
+                link: function ( scope, element, attrs ) {
+
                     scope.select = function ( value ) {
                         scope.model = value;
                         scope.onpick();
                     };
+
                     scope.menu = false;
-                    scope.hideMenu=function( ms ){
-                        var menu = scope.menu;
-                        setTimeout( function(){ menu=false;alert(1) }, ms );
+
+                    scope.show=function(){
+                        scope.menu = true;
                     }
-                }]
+
+                    scope.hide = function () {
+
+                        $timeout( function () {
+                            scope.menu = false;
+                        }, 100 )
+
+                    }
+
+                }
 
             };
 
