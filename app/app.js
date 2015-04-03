@@ -85,25 +85,6 @@
                     .getCarModels( $scope.main.carMake )
                     .then( function ( result ) {
 
-                        /*
-                        result.forEach( function( make ){
-
-                            make.models.forEach( function( model ){
-
-                                var i = parseInt( Math.random() * 20 );
-
-                                model.years = [];
-                                for(var yy=2015; yy>2015-i; yy--){
-                                    model.years.push( { name:yy } );
-                                }
-
-                            });
-                        });
-
-                         console.log(JSON.stringify( result, null, 1 ));
-                        */
-
-
                         //for convenience we apply the filter here, though it would really be handled server-side
                         result.forEach( function ( m ) {
                             if ( m.name === $scope.main.carMake ) {
