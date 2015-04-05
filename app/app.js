@@ -92,6 +92,13 @@
                             }
                         } );
 
+
+                        $scope.main.years = new Array();
+                        $scope.main.carYear = "";
+
+                        //$scope.$apply();
+
+
                     } );
             };
 
